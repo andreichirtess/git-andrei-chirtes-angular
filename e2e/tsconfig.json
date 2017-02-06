@@ -11,7 +11,7 @@
     "suppressImplicitAnyIndexErrors": true,
     "baseUrl": ".",
     "paths": {
-      "@NoyauFonctionnel/*": ["./ts/nf/*"]
+      "@NoyauFonctionnel/*": ["../ts/nf/*"]
     }
   },
   "exclude": [
