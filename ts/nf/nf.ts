@@ -30,6 +30,11 @@ class NF {
 	}
 }
 
+export type EventChose = {
+	fait?	: boolean,
+	texte?	: string
+};
+export type NF_Chose_CallBack = (nf: Chose, eventName: string, value: EventChose) => void;
 export class Chose extends NF {
 	readonly liste		: ListeChoses;
 	readonly date 		: Date;
@@ -55,11 +60,18 @@ export class Chose extends NF {
 		this.emit("update", {fait: fait});
 		return this;
 	}
+	on(eventName: "update", cb: NF_Chose_CallBack) : this {
+		return super.on(eventName, cb);
+	}
+	off(eventName: "update", cb: NF_Chose_CallBack) : this {
+		return super.off(eventName, cb);
+	}
 }
 
 export type EventListeChoses = {append?: Chose, remove?:Chose};
+export type NF_ListeChose_CallBack = (nf: ListeChoses, eventName: string, value: EventListeChoses) => void;
 export class ListeChoses extends NF {
-	readonly choses 	: Chose[];
+	choses 	: Chose[];
 	constructor	() {
 		super();
 		this.choses = [];
@@ -74,5 +86,11 @@ export class ListeChoses extends NF {
 		this.choses.splice( this.choses.indexOf(chose), 1 );
 		this.emit("update", {remove: chose});
 		return this;
+	}
+	on(eventName: "update", cb: NF_ListeChose_CallBack) : this {
+		return super.on(eventName, cb);
+	}
+	off(eventName: "update", cb: NF_ListeChose_CallBack) : this {
+		return super.off(eventName, cb);
 	}
 }

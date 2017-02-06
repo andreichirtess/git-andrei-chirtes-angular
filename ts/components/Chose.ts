@@ -1,16 +1,18 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input, ViewChild, ElementRef} from "@angular/core";
 import {Chose} from "@NoyauFonctionnel/nf";
 
 const htmlTemplate = `
 	<div class="view">
 		<input 	class			= "toggle" 
 				type			= "checkbox" 
-				/>
-		<label 	class="texte"></label>
+				name			= "fait"/>
+		<label 	class="texte"
+				></label>
 		<button class="destroy"></button>
 	</div>
-	<form>
-		<input class="edit"/>
+	<form *ngIf="editing">
+		<input 	class		= "edit"
+				/>
 	</form>
 `;
 
@@ -19,6 +21,9 @@ const htmlTemplate = `
   template		: htmlTemplate
 })
 export class ItemChose {
-	@Input() 	nf		: Chose;
-};
+    @Input ("nf" ) nf   : Chose;
+	@ViewChild("newText") newTextInput : ElementRef;
+	editing			    : boolean = false;
 
+	//constructor() {}
+}
