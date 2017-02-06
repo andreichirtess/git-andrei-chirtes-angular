@@ -17,7 +17,7 @@ let PromesseDocumentPret = new Promise( (resolve) => {
 
 @Component({
     selector		: "demo-m2m",
-    template		: `<liste-choses titre="L3 liste"></liste-choses>`
+    template		: `<liste-choses titre="Liste BSHM"></liste-choses>`
 })
 class CompDemoM2M {}
 

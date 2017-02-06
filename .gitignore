@@ -2,3 +2,6 @@
 /app
 /node_modules
 /js
+/e2e/report
+/e2e/ListeChoses.e2e-spec.js
+/e2e/ListeChoses.e2e-spec.js.map
