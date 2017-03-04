@@ -63,4 +63,3 @@ export class ListeChoses implements OnInit {
         return this.choses;
     }
 }
-
