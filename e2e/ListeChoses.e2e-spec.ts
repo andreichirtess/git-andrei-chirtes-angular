@@ -5,37 +5,51 @@ describe('Premiers tests', () => {
     let toggleAll       : ElementFinder;
     let itemInputsCheck : ElementArrayFinder;
     let items           : ElementArrayFinder;
-
-    beforeEach( () => {
+    let SF_inputNew     = element( by.css("#sansFramework > section > form > input") );
+    let SF_items        : ElementArrayFinder;
+    let SF_InputChecks  : ElementArrayFinder;
+    let computeElements = () => {
         browser.get('');
         inputNewTodo    = element( by.css('input.new-todo') );
         toggleAll       = element( by.css("section.main > input.toggle-all") );
         itemInputsCheck = element.all( by.css("item-chose input.toggle") );
         items           = element.all( by.css( "item-chose" ) );
-    });
+        SF_items        = element.all( by.css( "#sansFramework > section > ul .chose" ) );
+        SF_InputChecks  = element.all( by.css( "#sansFramework > section > ul .chose > input[type=checkbox]" ) );
+    };
+
+    beforeEach( computeElements );
 
     it('should add 3 new item', () => {
         inputNewTodo.sendKeys( "toto" );
         browser.actions().sendKeys( protractor.Key.ENTER ).perform();
         inputNewTodo.sendKeys( "titi" );
         browser.actions().sendKeys( protractor.Key.ENTER ).perform();
-        inputNewTodo.sendKeys( "tata" );
+
+        SF_inputNew.sendKeys( "tata" );
         browser.actions().sendKeys( protractor.Key.ENTER ).perform();
 
         itemInputsCheck = element.all( by.css("item-chose input.toggle") );
         items           = element.all( by.css( "item-chose" ) );
 
         expect(items.count()).toEqual(3);
-
         itemInputsCheck.each( c => {
             expect( c.isSelected() ).toBe( false );
         });
 
-
+        // MVP version
+        computeElements();
+        expect(SF_items.count()).toEqual(3);
+        SF_InputChecks.each( c => {
+            expect( c.isSelected() ).toBe( false );
+        });
     });
     it('toggleAll click=> all items are checked', () => {
         toggleAll.click();
         itemInputsCheck.each( c => {
+            expect( c.isSelected() ).toBe( true );
+        });
+        SF_InputChecks.each( c => {
             expect( c.isSelected() ).toBe( true );
         });
     });
@@ -46,6 +60,9 @@ describe('Premiers tests', () => {
     it('toggleAll click=> all items are checked', () => {
         toggleAll.click();
         itemInputsCheck.each( c => {
+            expect( c.isSelected() ).toBe( true );
+        });
+        SF_InputChecks.each( c => {
             expect( c.isSelected() ).toBe( true );
         });
     });
