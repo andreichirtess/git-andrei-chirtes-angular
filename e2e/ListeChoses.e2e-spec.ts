@@ -92,3 +92,57 @@ describe("Edition d'items", () => {
     });
 });
 
+// Filters
+describe("Filters are OK", () => {
+    let labelFirstItem: ElementFinder;
+    let inputNewTodo    : ElementFinder;
+    let items           : ElementArrayFinder;
+    let itemInputsCheck : ElementArrayFinder;
+
+    beforeEach( () => {
+        browser.get('');
+        labelFirstItem  = element( by.css(`item-chose .view label`) );
+        inputNewTodo    = element( by.css('input.new-todo') );
+        items           = element.all( by.css( "item-chose" ) );
+        itemInputsCheck = element.all( by.css("item-chose input.toggle") );
+    });
+
+    it("check first element as done, so 1/3 are done", () => {
+        itemInputsCheck.first().click();
+        let nbDone = itemInputsCheck.reduce( (acc,input) => acc + input.isSelected()?1:0, 0 );
+        expect(nbDone).toBe(1);
+        expect(itemInputsCheck.count()).toBe(3);
+    });
+
+    it("Filter all is selected", () => {
+        let filterAll = element( by.css("ul.filters a.filterAll") );
+        expect(filterAll.getAttribute("class").then( (strClass: string) => {
+            expect( strClass.split(" ").indexOf("selected") >= 0 ).toBe(true);
+        }));
+    });
+
+    it("Filter actives => 1 visible", () => {
+        let filterActives = element( by.css("ul.filters a.filterActives") );
+        filterActives.click();
+        itemInputsCheck = element.all( by.css("item-chose input.toggle") );
+        expect(itemInputsCheck.count()).toBe(1);
+    });
+
+    it("Filter completed => 2 visibles", () => {
+        let filterCompleted = element( by.css("ul.filters a.filterCompleted") );
+        filterCompleted.click();
+        itemInputsCheck = element.all( by.css("item-chose input.toggle") );
+        expect(itemInputsCheck.count()).toBe(2);
+    });
+
+    it("Select filter All and delete completed item => 1 remains", () => {
+        let filterAll = element( by.css("ul.filters a.filterAll") );
+        filterAll.click();
+        let clearCompleted = element( by.css("button.clear-completed") );
+        clearCompleted.click();
+        itemInputsCheck = element.all( by.css("item-chose input.toggle") );
+        expect(itemInputsCheck.count()).toBe(1);
+    });
+});
+
+// Suppress checked items...

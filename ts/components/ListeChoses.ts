@@ -22,13 +22,13 @@ const htmlTemplate = `
             <span class="todo-count"><strong></strong> restantes</span>
             <ul class="filters">
                 <li>
-                    <a>Tous</a>
+                    <a class="filterAll">Tous</a>
                 </li>
                 <li>
-                    <a>Actifs</a>
+                    <a class="filterActives">Actifs</a>
                 </li>
                 <li>
-                    <a>Complétés</a>
+                    <a class="filterCompleted">Complétés</a>
                 </li>
             </ul>
             <button class="clear-completed">Supprimer cochées</button>
