@@ -27,7 +27,7 @@
     "zone.js": "^0.7.4"
   },
   "devDependencies": {
-    "codelyzer": "^2.0.0-beta.4",
+    "codelyzer": "^2.0.1",
     "gulp": "^3.9.1",
     "gulp-jasmine": "^2.4.1",
     "gulp-sourcemaps": "^1.6.0",
