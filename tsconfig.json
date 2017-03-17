@@ -9,12 +9,14 @@
     "removeComments": false,
     "noImplicitAny": false,
     "suppressImplicitAnyIndexErrors": true,
-    "baseUrl": ".",
+    "baseUrl": "./ts",
+    "rootDir": "./ts",
     "paths": {
-      "@NoyauFonctionnel/*": ["./ts/nf/*"]
+      "@NoyauFonctionnel/*": ["./nf/*"]
     }
   },
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "!node_modules/@types"
   ]
 }
